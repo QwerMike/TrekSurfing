@@ -173,9 +173,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704062028452_InitialCreate.cs" />
+    <Compile Include="Migrations\201704062028452_InitialCreate.Designer.cs">
+      <DependentUpon>201704062028452_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704062131155_AddTrekEventAndReview.cs" />
+    <Compile Include="Migrations\201704062131155_AddTrekEventAndReview.Designer.cs">
+      <DependentUpon>201704062131155_AddTrekEventAndReview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\EntityBase.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Review.cs" />
+    <Compile Include="Models\TrekEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -246,6 +258,14 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201704062028452_InitialCreate.resx">
+      <DependentUpon>201704062028452_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704062131155_AddTrekEventAndReview.resx">
+      <DependentUpon>201704062131155_AddTrekEventAndReview.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

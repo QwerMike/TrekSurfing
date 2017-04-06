@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TrekSurfing.Web.Models;
+using System.Data.Entity;
 
 namespace TrekSurfing.Web.Controllers
 {
@@ -10,6 +12,10 @@ namespace TrekSurfing.Web.Controllers
     {
         public ActionResult Index()
         {
+            using (ApplicationDbContext context = new ApplicationDbContext())
+            {
+                ViewBag.Events = context.TrekEvents.Include(_ => _.Owner).ToList<TrekEvent>();
+            }
             return View();
         }
 
