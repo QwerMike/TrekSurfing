@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TrekSurfing.Web.Models
 {
-    public class TrekEvent
+    public class TrekEvent : EntityBase
     {
         [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
