@@ -12,11 +12,7 @@ namespace TrekSurfing.Web.Controllers
     {
         public ActionResult Index()
         {
-            using (ApplicationDbContext context = new ApplicationDbContext())
-            {
-                ViewBag.Events = context.TrekEvents.Include(_ => _.Owner).ToList<TrekEvent>();
-            }
-            return View();
+            return RedirectToAction("ViewAllEvents", "Event");
         }
 
         public ActionResult About()

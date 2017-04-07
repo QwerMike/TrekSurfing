@@ -1,0 +1,23 @@
+﻿@using TrekSurfing.Web.Models;
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        @foreach (var trekEvent in (IEnumerable<TrekEvent>)ViewBag.Events)
+        {
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <p><b>@trekEvent.Name</b></p>
+                    <p><i>@trekEvent.Owner.UserName</i></p>
+                    <p>Created: @trekEvent.Created</p>
+                    <p>Starts: @trekEvent.Starts</p>
+                    <p>Ends: @trekEvent.Ends</p>
+                    <hr>
+                    <p>@trekEvent.Description</p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
