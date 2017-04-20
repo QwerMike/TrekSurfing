@@ -1,5 +1,33 @@
-﻿@{
-    ViewBag.Title = "ViewEvent";
-}
+﻿@model TrekSurfing.Web.Models.TrekEvent
 
-<h2>ViewEvent</h2>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2>@Model.Name</h2>
+    </div>
+    <div class="panel-body">
+        <table class="table">
+            <tr>
+                <td>Owner:</td>
+                <td>@Model.Owner.UserName</td>
+            </tr>
+            <tr>
+                <td>Starts:</td>
+                <td>@Model.Starts</td>
+            </tr>
+            <tr>
+                <td>Ends:</td>
+                <td>@Model.Ends</td>
+            </tr>
+            <tr>
+                <td>Route:</td>
+                <td>@Model.Route</td>
+            </tr>
+            <tr>
+                <td colspan="2">Description:</td>
+            </tr>
+            <tr>
+                <td colspan="2">@Model.Description</td>
+            </tr>
+        </table>
+    </div>
+</div>
