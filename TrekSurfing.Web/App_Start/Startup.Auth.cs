@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using TrekSurfing.Web.Models;
+using TrekSurfing.Web.DAL;
 
 namespace TrekSurfing.Web
 {

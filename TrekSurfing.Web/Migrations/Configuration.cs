@@ -1,11 +1,9 @@
 namespace TrekSurfing.Web.Migrations
 {
-    using System;
-    using System.Data.Entity;
+    using DAL;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<TrekSurfing.Web.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
         public Configuration()
         {
@@ -13,7 +11,7 @@ namespace TrekSurfing.Web.Migrations
             ContextKey = "TrekSurfing.Web.Models.ApplicationDbContext";
         }
 
-        protected override void Seed(TrekSurfing.Web.Models.ApplicationDbContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
