@@ -15,7 +15,7 @@
         @foreach (var trekEvent in (IEnumerable<TrekEvent>)ViewBag.Events)
         {
             <tr>
-                <td><a href="@Url.Action("ViewEvent", "EventController", new { id = trekEvent.Id })"><b>@trekEvent.Name</b></a></td>
+                <td><a href="@Url.Action("ViewEvent", "Event", new { id = trekEvent.Id })"><b>@trekEvent.Name</b></a></td>
                 <td><i>@trekEvent.Owner.UserName</i></td>
                 <td>@trekEvent.Starts</td>
                 <td>@trekEvent.Ends</td>
