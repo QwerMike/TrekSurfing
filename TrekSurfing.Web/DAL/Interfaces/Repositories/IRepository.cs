@@ -8,6 +8,7 @@ namespace TrekSurfing.Web.DAL.Interfaces.Repositories
     {
         TEntity Get(int id);
         IEnumerable<TEntity> GetAll();
+        IEnumerable<TEntity> GetAll(params string[] includes);
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
 
         void Add(TEntity entity);

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using TrekSurfing.Web.DAL;
 using TrekSurfing.Web.DAL.Interfaces;
 using TrekSurfing.Web.DAL.Interfaces.Repositories;
 using TrekSurfing.Web.DAL.Repositories;
@@ -26,10 +27,9 @@ namespace TrekSurfing.Web.Infrastructure
         }
         private void AddBindings()
         {
-            // put bindings here MADAFACKA!!!!!!!!!
-            kernel.Bind<ITrekEventRepository, TrekEventRepository>();
-            kernel.Bind<IReviewRepository, ReviewRepository>();
-            kernel.Bind<IUnitOfWork, IUnitOfWork>();
+            kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
+            kernel.Bind<ITrekEventRepository>().To<TrekEventRepository>();
+            kernel.Bind<IReviewRepository>().To<ReviewRepository>();
         }
     }
 }

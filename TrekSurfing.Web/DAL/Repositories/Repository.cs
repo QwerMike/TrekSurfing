@@ -26,6 +26,15 @@ namespace TrekSurfing.Web.DAL.Repositories
             return Context.Set<TEntity>().ToList();
         }
 
+        public IEnumerable<TEntity> GetAll(params string[] includes)
+        {
+            IQueryable<TEntity> query = Context.Set<TEntity>();
+            foreach (var include in includes)
+                query = query.Include(include);
+
+            return query;
+        }
+
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
             return Context.Set<TEntity>().Where(predicate);

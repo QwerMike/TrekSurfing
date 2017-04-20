@@ -14,11 +14,17 @@ namespace TrekSurfing.Web.DAL
         private ITrekEventRepository trekEvents;
         private IReviewRepository reviews;
 
-        public UnitOfWork(ApplicationDbContext context)
+        public UnitOfWork(
+            ApplicationDbContext context,
+            ITrekEventRepository trekEvents,
+            IReviewRepository reviews)
         {
             this.context = context;
-            trekEvents = new TrekEventRepository(context);
-            reviews = new ReviewRepository(context);
+            this.trekEvents = trekEvents;
+            this.reviews = reviews; 
+            // excluded cause of DI container
+            //trekEvents = new TrekEventRepository(context);
+            //reviews = new ReviewRepository(context);
         }
 
         public ITrekEventRepository TrekEvents
