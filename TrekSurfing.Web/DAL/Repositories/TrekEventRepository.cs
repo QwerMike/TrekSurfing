@@ -1,5 +1,7 @@
 ﻿using TrekSurfing.Web.DAL.Interfaces.Repositories;
 using TrekSurfing.Web.Models;
+using System.Data.Entity;
+using System.Linq;
 
 namespace TrekSurfing.Web.DAL.Repositories
 {
@@ -13,6 +15,13 @@ namespace TrekSurfing.Web.DAL.Repositories
         public ApplicationDbContext AppDbContext
         {
             get { return Context as ApplicationDbContext; }
+        }
+
+        public new TrekEvent Get(int id)
+        {
+            return AppDbContext.Set<TrekEvent>()
+                .Include(_ => _.Owner)
+                .SingleOrDefault(_ => _.Id == id);
         }
     }
 }
