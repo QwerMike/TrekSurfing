@@ -3,11 +3,23 @@ using TrekSurfing.Web.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Collections.Generic;
+using TrekSurfing.Web.DAL;
+using Microsoft.AspNet.Identity;
+using TrekSurfing.Web.DAL.Interfaces;
+using System.Web;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace TrekSurfing.Web.Controllers
 {
     public class EventController : Controller
     {
+        private IUnitOfWork unitOfWork;
+
+        public EventController(IUnitOfWork unitOfWork)
+        {
+            this.unitOfWork = unitOfWork;
+        }
+
         // GET: View
         public ActionResult ViewAllEvents()
         {
@@ -20,11 +32,37 @@ namespace TrekSurfing.Web.Controllers
 
         public ActionResult ViewEvent(int id)
         {
-            using (ApplicationDbContext context = new ApplicationDbContext())
-            {
-                ViewBag.Event = new LinkedList<TrekEvent>();
-            }
+            TrekEvent trekEvent = unitOfWork.TrekEvents.Get(id);
+            return View(trekEvent);
+        }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(EventCreationModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                TrekEvent trekEvent = new TrekEvent
+                {
+                    Name = model.Name,
+                    Owner = System.Web.HttpContext.Current.GetOwinContext()
+                        .GetUserManager<ApplicationUserManager>()
+                        .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId()),
+                    Starts = model.Starts,
+                    Ends = model.Starts,
+                    Route = model.Route,
+                    Description = model.Description
+                };
+                unitOfWork.TrekEvents.Add(trekEvent);
+                unitOfWork.Complete();
+                return RedirectToAction("Index", "Home");
+            }
+            return View(model);
         }
     }
 }
