@@ -19,8 +19,7 @@ namespace TrekSurfing.Web.DAL
         {
             this.context = context;
             //this.trekEvents = trekEvents;
-            //this.reviews = reviews; 
-            
+            //this.reviews = reviews;
             trekEvents = new TrekEventRepository(context);
             reviews = new ReviewRepository(context);
         }
