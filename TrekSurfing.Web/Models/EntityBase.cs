@@ -10,7 +10,7 @@ namespace TrekSurfing.Web.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required, DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        [Required]//, DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime Created { get; set; }
     }
 }

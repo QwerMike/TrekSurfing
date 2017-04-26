@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TrekSurfing.Web.Models
 {
@@ -17,6 +18,9 @@ namespace TrekSurfing.Web.Models
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Owner is required")]
+        public string OwnerId { get; set; }
+
+        [ForeignKey(nameof(OwnerId))]
         public ApplicationUser Owner { get; set; }
 
         [Required(ErrorMessage = "Route is required")]
