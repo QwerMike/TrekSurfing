@@ -28,8 +28,8 @@ namespace TrekSurfing.Web.Infrastructure
         private void AddBindings()
         {
             kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
-            kernel.Bind<ITrekEventRepository>().To<TrekEventRepository>();
-            kernel.Bind<IReviewRepository>().To<ReviewRepository>();
+            //kernel.Bind<ITrekEventRepository>().To<TrekEventRepository>();
+            //kernel.Bind<IReviewRepository>().To<ReviewRepository>();
         }
     }
 }
