@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity;
 using TrekSurfing.Web.DAL.Interfaces;
 using System.Web;
 using Microsoft.AspNet.Identity.Owin;
+using System;
 
 namespace TrekSurfing.Web.Controllers
 {
@@ -49,10 +50,9 @@ namespace TrekSurfing.Web.Controllers
             {
                 TrekEvent trekEvent = new TrekEvent
                 {
+                    Created = DateTime.Now,
                     Name = model.Name,
-                    Owner = System.Web.HttpContext.Current.GetOwinContext()
-                        .GetUserManager<ApplicationUserManager>()
-                        .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId()),
+                    OwnerId = System.Web.HttpContext.Current.User.Identity.GetUserId(),
                     Starts = model.Starts,
                     Ends = model.Starts,
                     Route = model.Route,

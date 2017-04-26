@@ -209,6 +209,14 @@
     <Compile Include="Migrations\201704062131155_AddTrekEventAndReview.Designer.cs">
       <DependentUpon>201704062131155_AddTrekEventAndReview.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704262042385_AddOwnerIdToTrekEvent.cs" />
+    <Compile Include="Migrations\201704262042385_AddOwnerIdToTrekEvent.Designer.cs">
+      <DependentUpon>201704262042385_AddOwnerIdToTrekEvent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704262102554_RemoveCreatedDatetimeAutogeneration.cs" />
+    <Compile Include="Migrations\201704262102554_RemoveCreatedDatetimeAutogeneration.Designer.cs">
+      <DependentUpon>201704262102554_RemoveCreatedDatetimeAutogeneration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\EntityBase.cs" />
@@ -298,6 +306,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704062131155_AddTrekEventAndReview.resx">
       <DependentUpon>201704062131155_AddTrekEventAndReview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704262042385_AddOwnerIdToTrekEvent.resx">
+      <DependentUpon>201704262042385_AddOwnerIdToTrekEvent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704262102554_RemoveCreatedDatetimeAutogeneration.resx">
+      <DependentUpon>201704262102554_RemoveCreatedDatetimeAutogeneration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
