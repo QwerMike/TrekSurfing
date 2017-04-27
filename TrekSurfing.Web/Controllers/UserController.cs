@@ -102,6 +102,19 @@ namespace TrekSurfing.Web.Controllers
 
         }
 
+        public ActionResult RetrieveImage(string id)
+        {
+            byte[] cover = UserManager.FindById(id).Image;
+            if (cover != null)
+            {
+                return File(cover, "image/jpg");
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         private ProfileViewModel getProfileById(string id)
         {
             using (ApplicationDbContext context = new ApplicationDbContext())

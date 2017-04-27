@@ -3,8 +3,10 @@
     ViewBag.Title = "MyProfile";
 }
 
-<h2>@Model.Email</h2>
-
+<h2>@Model.FirstName @Model.SecondName</h2>
+<h3>Email: <i>@Model.Email</i></h3>
+<img src="/User/RetrieveImage/@Model.Id" alt="" height=200 />
+<h4>@Model.About</h4>
 <h3>Events:</h3>
 <div class="row">
     <div class="col-md-12">
