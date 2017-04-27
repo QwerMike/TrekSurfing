@@ -5,11 +5,19 @@ using System.Linq;
 using System.Collections.Generic;
 using TrekSurfing.Web.DAL;
 using Microsoft.AspNet.Identity;
+using TrekSurfing.Web.DAL.Interfaces;
 
 namespace TrekSurfing.Web.Controllers
 {
     public class UserController : Controller
     {
+        private IUnitOfWork unitOfWork { get; set; }
+
+        public UserController(IUnitOfWork unitOfWork)
+        {
+            this.unitOfWork = unitOfWork;
+        }
+
         public ActionResult MyProfile()
         {
             string userId = System.Web.HttpContext.Current.User.Identity.GetUserId();
@@ -83,6 +91,8 @@ namespace TrekSurfing.Web.Controllers
                 profile.UserName = data.UserName;
                 profile.Email = data.Email;
                 profile.PhoneNumber = data.PhoneNumber;
+                IEnumerable<TrekEvent> events = unitOfWork.TrekEvents.Find(trekEvent => trekEvent.OwnerId.Equals(profile.Id));
+                profile.TrekEvents = events != null ? events : new LinkedList<TrekEvent>();
                 return profile;
             }
         }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace TrekSurfing.Web.Models
@@ -16,5 +18,6 @@ namespace TrekSurfing.Web.Models
         [Required(ErrorMessage = "PhoneNumber is required")]
         public string PhoneNumber { get; set; }
 
+        public IEnumerable<TrekEvent> TrekEvents { get; set; }
     }
 }

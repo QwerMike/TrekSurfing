@@ -293,6 +293,7 @@
     <Content Include="Views\User\ViewProfile.cshtml" />
     <Content Include="Views\User\EditProfile.cshtml" />
     <Content Include="Views\User\MyProfile.cshtml" />
+    <Content Include="Views\Shared\EventList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
