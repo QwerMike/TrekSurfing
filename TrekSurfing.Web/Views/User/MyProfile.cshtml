@@ -1,0 +1,16 @@
+﻿@model TrekSurfing.Web.Models.ProfileViewModel
+@{
+    ViewBag.Title = "MyProfile";
+}
+
+<h2>MyProfile</h2>
+
+<div>
+    @Html.DisplayFor(model => model.UserName)
+</div>
+<div>
+    @Html.DisplayFor(model => model.Email)
+</div>
+<div>
+    @Html.DisplayFor(model => model.PhoneNumber)
+</div>

@@ -4,16 +4,17 @@ using System.Data.Entity;
 using System.Linq;
 using System.Collections.Generic;
 using TrekSurfing.Web.DAL;
+using Microsoft.AspNet.Identity;
 
 namespace TrekSurfing.Web.Controllers
 {
     public class UserController : Controller
     {
-
-        /*public ActionResult MyProfile(string id)
+        public ActionResult MyProfile()
         {
-            return View();
-        }*/
+            string userId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            return View(getProfileById(userId));
+        }
 
         // GET: User/ViewProfile/1
         public ActionResult ViewProfile(string id)
