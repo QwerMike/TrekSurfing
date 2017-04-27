@@ -29,4 +29,11 @@ namespace TrekSurfing.Web.Models
         public virtual IEnumerable<Review> Reviews { get; set; }
         public virtual IEnumerable<TrekEvent> TrekEvents { get; set; }
     }
+
+    public class ApplicationRole : IdentityRole
+    {
+        public ApplicationRole() : base() { }
+
+        public ApplicationRole(string name) : base(name) { }
+    }
 }
