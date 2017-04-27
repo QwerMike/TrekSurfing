@@ -2,6 +2,7 @@
 using TrekSurfing.Web.Models;
 using System.Data.Entity;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace TrekSurfing.Web.DAL.Repositories
 {
@@ -22,6 +23,12 @@ namespace TrekSurfing.Web.DAL.Repositories
             return AppDbContext.Set<TrekEvent>()
                 .Include(_ => _.Owner)
                 .SingleOrDefault(_ => _.Id == id);
+        }
+
+        public new IEnumerable<TrekEvent> GetAll()
+        {
+            return AppDbContext.Set<TrekEvent>()
+                .Include(_ => _.Owner);
         }
 
         public byte[] GetImageFor(int id)

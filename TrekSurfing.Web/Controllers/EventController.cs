@@ -25,10 +25,7 @@ namespace TrekSurfing.Web.Controllers
         // GET: View
         public ActionResult ViewAllEvents()
         {
-            using (ApplicationDbContext context = new ApplicationDbContext())
-            {
-                ViewBag.Events = context.TrekEvents.Include(_ => _.Owner).ToList<TrekEvent>();
-            }
+            ViewBag.Events = unitOfWork.TrekEvents.GetAll();
             return View();
         }
 
