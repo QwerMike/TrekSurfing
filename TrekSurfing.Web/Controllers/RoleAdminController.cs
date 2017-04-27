@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -12,6 +11,7 @@ using TrekSurfing.Web.Models;
 
 namespace TrekSurfing.Web.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class RoleAdminController : Controller
     {
         public ActionResult Index()
