@@ -9,7 +9,8 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>ViewUser</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <title>@Html.DisplayFor(model => model.UserName)</title>
 </head>
 <body>
     <div>
@@ -21,11 +22,8 @@
     <div>
         @Html.DisplayFor(model => model.PhoneNumber)
     </div>
-    
-                
-                
-                
-       
-    </table>
+    <div>
+        <a href="@Url.Action("EditProfile", "User", new { id = Model.Id })"><b>Редагувати профіль</b></a>
+    </div>
 </body>
 </html>

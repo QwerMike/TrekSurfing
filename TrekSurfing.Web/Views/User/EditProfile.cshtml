@@ -9,7 +9,8 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>View</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <title>Редагування профілю</title>
 </head>
 <body>
     @using (Html.BeginForm())
@@ -17,8 +18,7 @@
         @Html.AntiForgeryToken()
         
         <div class="form-horizontal">
-            <h4>ProfileViewModel</h4>
-            <hr />
+            <h4>Редагування профілю</h4>
     
             <div class="form-group">
                 @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -50,10 +50,13 @@
                 </div>
             </div>
         </div>
+        <div>
+        
+        </div>
     }
-    
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
+    @using (Html.BeginForm("DeleteProfile", "User", new { id = Model.Id }, FormMethod.Post, null))
+    {
+        <input type="submit" value="Видалити" />
+    }
 </body>
 </html>

@@ -63,30 +63,41 @@ namespace TrekSurfing.Web.Controllers
                     context.Entry(user).State = EntityState.Modified;
                     context.SaveChanges();
 
-                    return RedirectToAction("ViewUser", new { id = profile.Id });
+                    return RedirectToAction("ViewProfile", new { id = profile.Id });
                 }
                 return View(profile);
             }
         }
 
+        // вчився видаляти
+        /*[HttpPost]
         public ActionResult DeleteProfile(string id)
         {
             using (ApplicationDbContext context = new ApplicationDbContext())
             {
-                return View();
+                ApplicationUser user = context.Users.Find(id);
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+                context.Users.Remove(user);
+                context.SaveChanges();
+                return RedirectToAction("ViewProfile", new { id = id });
             }
-        }
+
+        }*/
 
         private ProfileViewModel getProfileById(string id)
         {
             using (ApplicationDbContext context = new ApplicationDbContext())
             {
                 ProfileViewModel profile = new ProfileViewModel();
-                var data = (from User in context.Users where id == User.Id select new { User.UserName, User.Email, User.PhoneNumber }).First();
-                if (data == null)
+                var data1 = (from User in context.Users where id == User.Id select new { User.UserName, User.Email, User.PhoneNumber });
+                if (data1 == null)
                 {
                     return null;
                 }
+                var data = data1.First();
                 profile.Id = id;
                 profile.UserName = data.UserName;
                 profile.Email = data.Email;
