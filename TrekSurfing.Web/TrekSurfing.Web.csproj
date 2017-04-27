@@ -197,6 +197,7 @@
     <Compile Include="DAL\Repositories\ReviewRepository.cs" />
     <Compile Include="DAL\Repositories\TrekEventRepository.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -223,6 +224,7 @@
     <Compile Include="Models\EventCreationModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ProfileViewModel.cs" />
     <Compile Include="Models\Review.cs" />
     <Compile Include="Models\TrekEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -288,6 +290,8 @@
     <Content Include="Views\Event\Create.cshtml" />
     <Content Include="Views\Event\ViewAllEvents.cshtml" />
     <Content Include="Views\Event\ViewEvent.cshtml" />
+    <Content Include="Views\User\ViewProfile.cshtml" />
+    <Content Include="Views\User\EditProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
