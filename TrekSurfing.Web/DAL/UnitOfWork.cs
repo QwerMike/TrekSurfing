@@ -11,7 +11,9 @@ namespace TrekSurfing.Web.DAL
     class UnitOfWork : IUnitOfWork, IDisposable
     {
         private readonly ApplicationDbContext context;
+
         private ITrekEventRepository trekEvents;
+
         private IReviewRepository reviews;
 
         public UnitOfWork(

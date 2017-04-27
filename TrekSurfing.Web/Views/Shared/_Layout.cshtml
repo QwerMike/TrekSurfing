@@ -39,6 +39,10 @@
         @RenderBody()
         <hr />
         <footer>
+            @if (TempData["message"] != null)
+             {
+                <div class="alert alert-success">@TempData["message"]</div>
+             }          
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
