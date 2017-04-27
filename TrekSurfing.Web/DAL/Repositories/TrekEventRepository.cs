@@ -3,6 +3,7 @@ using TrekSurfing.Web.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Collections.Generic;
+using System.Text;
 
 namespace TrekSurfing.Web.DAL.Repositories
 {
@@ -29,6 +30,22 @@ namespace TrekSurfing.Web.DAL.Repositories
         {
             return AppDbContext.Set<TrekEvent>()
                 .Include(_ => _.Owner);
+        }
+
+        public void SaveProduct(TrekEvent trekEvent)
+        {
+            TrekEvent dbEntry = AppDbContext.Set<TrekEvent>().Find(trekEvent.Id);
+            if (dbEntry != null)
+            {
+                dbEntry.Name = trekEvent.Name;
+                dbEntry.Description = trekEvent.Description;
+                dbEntry.OwnerId = trekEvent.OwnerId;
+                dbEntry.Created = trekEvent.Created;
+                dbEntry.Image = trekEvent.Image;
+                dbEntry.Starts = trekEvent.Starts;
+                dbEntry.Ends = trekEvent.Starts;
+                dbEntry.Route = trekEvent.Route;
+            }
         }
 
         public byte[] GetImageFor(int id)
