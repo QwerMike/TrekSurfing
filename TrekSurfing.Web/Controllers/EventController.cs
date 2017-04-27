@@ -85,5 +85,15 @@ namespace TrekSurfing.Web.Controllers
                 return null;
             }
         }
+
+        [HttpPost]
+        public ActionResult DeleteEvent(int id)
+        {
+            TrekEvent deletedEvent = unitOfWork.TrekEvents.Get(id);
+            unitOfWork.TrekEvents.Remove(deletedEvent);
+            unitOfWork.Complete();
+            TempData["message"] = string.Format("{0} was deleted!", deletedEvent.Name);
+            return RedirectToAction("ViewAllEvents", "Event");
+        }
     }
 }
