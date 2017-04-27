@@ -27,7 +27,6 @@ namespace TrekSurfing.Web.Infrastructure
         }
         private void AddBindings()
         {
-            kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
             kernel.Bind<IUnitOfWork>().To<UnitOfWork>().WithConstructorArgument<ApplicationDbContext>(new ApplicationDbContext());
             //kernel.Bind<ITrekEventRepository>().To<TrekEventRepository>();
             //kernel.Bind<IReviewRepository>().To<ReviewRepository>();
