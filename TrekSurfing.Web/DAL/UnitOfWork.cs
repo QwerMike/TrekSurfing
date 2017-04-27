@@ -24,6 +24,16 @@ namespace TrekSurfing.Web.DAL
             reviews = new ReviewRepository(context);
         }
 
+        public UnitOfWork(
+            ApplicationDbContext context,
+            ITrekEventRepository trekEventRepository,
+            IReviewRepository reviewRepository)
+        {
+            this.context = context;
+            trekEvents = new TrekEventRepository(context);
+            reviews = new ReviewRepository(context);
+        }
+
         public ITrekEventRepository TrekEvents
         {
             get { return trekEvents; }
