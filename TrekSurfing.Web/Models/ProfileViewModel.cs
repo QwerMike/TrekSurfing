@@ -18,6 +18,11 @@ namespace TrekSurfing.Web.Models
         [Required(ErrorMessage = "PhoneNumber is required")]
         public string PhoneNumber { get; set; }
 
+        public string FirstName { get; set; }
+        public string SecondName { get; set; }
+        public string About { get; set; }
+        public byte[] Image { get; set; }
+
         public IEnumerable<TrekEvent> TrekEvents { get; set; }
     }
 }

@@ -6,16 +6,31 @@ using System.Collections.Generic;
 using TrekSurfing.Web.DAL;
 using Microsoft.AspNet.Identity;
 using TrekSurfing.Web.DAL.Interfaces;
+using System.Web;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace TrekSurfing.Web.Controllers
 {
     public class UserController : Controller
     {
         private IUnitOfWork unitOfWork { get; set; }
+        private ApplicationUserManager _userManager;
 
         public UserController(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
         }
 
         public ActionResult MyProfile()
@@ -65,7 +80,7 @@ namespace TrekSurfing.Web.Controllers
 
                     return RedirectToAction("ViewProfile", new { id = profile.Id });
                 }
-                return View(profile);
+                else return View(profile);
             }
         }
 
@@ -92,20 +107,20 @@ namespace TrekSurfing.Web.Controllers
             using (ApplicationDbContext context = new ApplicationDbContext())
             {
                 ProfileViewModel profile = new ProfileViewModel();
-                var data1 = (from User in context.Users where id == User.Id select new { User.UserName, User.Email, User.PhoneNumber });
-                //зробити не таку бидлоперевірку
-                if (data1.ToArray().Length == 0)
-                {
-                    return null;
-                }
-                var data = data1.First();
-                profile.Id = id;
-                profile.UserName = data.UserName;
-                profile.Email = data.Email;
-                profile.PhoneNumber = data.PhoneNumber;
+                var data = UserManager.FindById(id);
+                if (data == null) return null; 
+
                 IEnumerable<TrekEvent> events = unitOfWork.TrekEvents.Find(trekEvent => trekEvent.OwnerId.Equals(profile.Id));
-                profile.TrekEvents = events != null ? events : new LinkedList<TrekEvent>();
-                return profile;
+                return new ProfileViewModel {
+                    Id = id,
+                    UserName = data.UserName,
+                    Email = data.Email,
+                    PhoneNumber = data.PhoneNumber,
+                    FirstName = data.FirstName,
+                    SecondName = data.SecondName,
+                    About = data.About,
+                    TrekEvents = events != null ? events : new LinkedList<TrekEvent>()
+                };
             }
         }
     }

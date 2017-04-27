@@ -151,7 +151,16 @@ namespace TrekSurfing.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                HttpPostedFileBase file = Request.Files.Count != 0 ? Request.Files.Get(0) : null;
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    SecondName = model.SecondName,
+                    About = model.About,
+                    Image = file != null ? EventController.ConvertToBytes(file) : null
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

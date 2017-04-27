@@ -68,7 +68,7 @@ namespace TrekSurfing.Web.Controllers
             return View(model);
         }
 
-        private byte[] ConvertToBytes(HttpPostedFileBase image)
+        public static byte[] ConvertToBytes(HttpPostedFileBase image)
         {
             byte[] imageBytes = null;
             BinaryReader reader = new BinaryReader(image.InputStream);

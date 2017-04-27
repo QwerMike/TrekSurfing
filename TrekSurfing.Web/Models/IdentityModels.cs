@@ -21,6 +21,12 @@ namespace TrekSurfing.Web.Models
             return userIdentity;
         }
 
+        public string FirstName { get; set; }
+        public string SecondName { get; set; }
+        public string About { get; set; }
+        public byte[] Image { get; set; }
+
         public virtual IEnumerable<Review> Reviews { get; set; }
+        public virtual IEnumerable<TrekEvent> TrekEvents { get; set; }
     }
 }
