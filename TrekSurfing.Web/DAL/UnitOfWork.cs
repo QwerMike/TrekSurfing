@@ -8,7 +8,7 @@ using TrekSurfing.Web.DAL.Repositories;
 
 namespace TrekSurfing.Web.DAL
 {
-    class UnitOfWork : IUnitOfWork, IDisposable
+    public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private readonly ApplicationDbContext context;
 

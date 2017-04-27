@@ -27,7 +27,13 @@
                     <td>@trekEvent.Ends</td>
                     <td>
                         <a href="@Url.Action("Edit", "Event", new { id = trekEvent.Id })"><b>Edit</b></a>&nbsp;
-                        <a href="@Url.Action("Delete", "Event", new { id = trekEvent.Id })" style="color: red;"><b>Delete</b></a>
+                       <b>
+                            @using (Html.BeginForm("DeleteEvent", "Event"))
+                            {
+                                @Html.Hidden("id", trekEvent.Id)
+                                <input type="submit" class="btn btn-default btn-xs" value="Delete" style="color: red;" />
+                            }
+                       </b>
                     </td>
                 </tr>
             }
