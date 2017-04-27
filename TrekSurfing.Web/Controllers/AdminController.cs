@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,16 @@ namespace TrekSurfing.Web.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return View(UserManager.Users);
+        }
+
+        private ApplicationUserManager UserManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext()
+                    .GetUserManager<ApplicationUserManager>();
+            }
         }
     }
 }
