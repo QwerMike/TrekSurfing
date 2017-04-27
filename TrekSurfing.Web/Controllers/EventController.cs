@@ -10,6 +10,7 @@ using System.Web;
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.IO;
+using System.Text;
 
 namespace TrekSurfing.Web.Controllers
 {
@@ -96,26 +97,10 @@ namespace TrekSurfing.Web.Controllers
             return RedirectToAction("MyProfile", "User");
         }
 
-        [HttpPost]
-        public ActionResult Edit(int id, EventCreationModel model)
-        {
-            TrekEvent editedEvent = unitOfWork.TrekEvents.Get(id);
-            HttpPostedFileBase file = Request.Files.Count != 0 ? Request.Files.Get(0) : null;
-            if (ModelState.IsValid)
-            {
-                editedEvent.Created = DateTime.Now;
-                editedEvent.Name = model.Name;
-                editedEvent.OwnerId = System.Web.HttpContext.Current.User.Identity.GetUserId();
-                editedEvent.Starts = model.Starts;
-                editedEvent.Ends = model.Starts;
-                editedEvent.Route = model.Route;
-                editedEvent.Image = file != null ? ConvertToBytes(file) : null;
-                editedEvent.Description = model.Description;
-                unitOfWork.Complete();
-                TempData["message"] = string.Format("{0} has been changed", editedEvent.Name);
-                return RedirectToAction("MyProfile", "User");
-            }
-            return View(model);
-        }
+        //[HttpPost]
+        //public ActionResult EditEvent(int id, EventCreationModel model)
+        //{
+
+        //}
     }
 }
