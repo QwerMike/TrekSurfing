@@ -185,9 +185,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RoleAdminController.cs" />
     <Compile Include="DAL\ApplicationDbContext.cs" />
     <Compile Include="DAL\Interfaces\IUnitOfWork.cs" />
     <Compile Include="DAL\Interfaces\Repositories\IRepository.cs" />
@@ -201,6 +203,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\ApplicationRoleManager.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Migrations\201704062028452_InitialCreate.cs" />
     <Compile Include="Migrations\201704062028452_InitialCreate.Designer.cs">
@@ -221,6 +224,10 @@
     <Compile Include="Migrations\201704271925024_AddNameSurnameAboutImageToUser.cs" />
     <Compile Include="Migrations\201704271925024_AddNameSurnameAboutImageToUser.Designer.cs">
       <DependentUpon>201704271925024_AddNameSurnameAboutImageToUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704271925142_AddApplictionRole.cs" />
+    <Compile Include="Migrations\201704271925142_AddApplictionRole.Designer.cs">
+      <DependentUpon>201704271925142_AddApplictionRole.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -298,6 +305,10 @@
     <Content Include="Views\User\EditProfile.cshtml" />
     <Content Include="Views\User\MyProfile.cshtml" />
     <Content Include="Views\Shared\EventList.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Shared\CustomError.cshtml" />
+    <Content Include="Views\RoleAdmin\Index.cshtml" />
+    <Content Include="Views\RoleAdmin\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -325,6 +336,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704271925024_AddNameSurnameAboutImageToUser.resx">
       <DependentUpon>201704271925024_AddNameSurnameAboutImageToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704271925142_AddApplictionRole.resx">
+      <DependentUpon>201704271925142_AddApplictionRole.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
