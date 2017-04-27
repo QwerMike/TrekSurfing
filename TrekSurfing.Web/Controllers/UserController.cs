@@ -3,6 +3,7 @@ using TrekSurfing.Web.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Collections.Generic;
+using TrekSurfing.Web.DAL;
 
 namespace TrekSurfing.Web.Controllers
 {
