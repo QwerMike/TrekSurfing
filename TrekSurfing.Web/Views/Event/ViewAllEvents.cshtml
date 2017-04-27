@@ -17,7 +17,7 @@
         {
             <tr>
                 <td><a href="@Url.Action("ViewEvent", "Event", new { id = trekEvent.Id })"><b>@trekEvent.Name</b></a></td>
-                <td><i>@trekEvent.Owner.UserName</i></td>
+                <td><a href="/User/ViewProfile/@trekEvent.Owner.Id">@trekEvent.Owner.UserName</a></td>
                 <td>@trekEvent.Starts</td>
                 <td>@trekEvent.Ends</td>
             </tr>
