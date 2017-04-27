@@ -70,7 +70,7 @@ namespace TrekSurfing.Web.Controllers
         }
 
         // вчився видаляти
-        /*[HttpPost]
+        [HttpPost]
         public ActionResult DeleteProfile(string id)
         {
             using (ApplicationDbContext context = new ApplicationDbContext())
@@ -85,7 +85,7 @@ namespace TrekSurfing.Web.Controllers
                 return RedirectToAction("ViewProfile", new { id = id });
             }
 
-        }*/
+        }
 
         private ProfileViewModel getProfileById(string id)
         {
@@ -93,7 +93,8 @@ namespace TrekSurfing.Web.Controllers
             {
                 ProfileViewModel profile = new ProfileViewModel();
                 var data1 = (from User in context.Users where id == User.Id select new { User.UserName, User.Email, User.PhoneNumber });
-                if (data1 == null)
+                //зробити не таку бидлоперевірку
+                if (data1.ToArray().Length == 0)
                 {
                     return null;
                 }
