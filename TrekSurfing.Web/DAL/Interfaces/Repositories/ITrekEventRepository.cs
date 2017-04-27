@@ -4,5 +4,6 @@ namespace TrekSurfing.Web.DAL.Interfaces.Repositories
 {
     public interface ITrekEventRepository : IRepository<TrekEvent>
     {
+        byte[] GetImageFor(int id);
     }
 }

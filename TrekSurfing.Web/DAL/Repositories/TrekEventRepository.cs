@@ -23,5 +23,12 @@ namespace TrekSurfing.Web.DAL.Repositories
                 .Include(_ => _.Owner)
                 .SingleOrDefault(_ => _.Id == id);
         }
+
+        public byte[] GetImageFor(int id)
+        {
+            var q = from temp in AppDbContext.TrekEvents where temp.Id == id select temp.Image;
+            byte[] cover = q.First();
+            return cover;
+        }
     }
 }

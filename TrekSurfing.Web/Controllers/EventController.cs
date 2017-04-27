@@ -75,5 +75,18 @@ namespace TrekSurfing.Web.Controllers
             imageBytes = reader.ReadBytes((int)image.ContentLength);
             return imageBytes;
         }
+
+        public ActionResult RetrieveImage(int id)
+        {
+            byte[] cover = unitOfWork.TrekEvents.GetImageFor(id);
+            if (cover != null)
+            {
+                return File(cover, "image/jpg");
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
