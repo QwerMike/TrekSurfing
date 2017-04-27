@@ -1,11 +1,11 @@
-﻿@model TrekSurfing.Web.Models.TrekEvent
+﻿@model TrekSurfing.Web.Models.EventCreationModel
 @{
     ViewBag.Title = "Create";
 }
 
 <h2>Create</h2>
 
-@using (Html.BeginForm("Create", "Event", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Create", "Event", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype= "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <h4>Create a new event.</h4>
@@ -35,6 +35,13 @@
             @Html.TextBoxFor(m => m.Route, new { @class = "form-control" })
         </div>
     </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Route, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            <input type="file" name="Image" id="ImageData" />
+        </div>
+    </div>
+    
     <div class="form-group">
         @Html.LabelFor(m => m.Description, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">

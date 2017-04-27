@@ -17,6 +17,8 @@ namespace TrekSurfing.Web.Models
         [Required(ErrorMessage = "End date is required")]
         public DateTime Ends { get; set; }
 
+        public String Image { get; set; }
+
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Route is required")]

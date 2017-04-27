@@ -9,6 +9,7 @@ using TrekSurfing.Web.DAL.Interfaces;
 using System.Web;
 using Microsoft.AspNet.Identity.Owin;
 using System;
+using System.IO;
 
 namespace TrekSurfing.Web.Controllers
 {
@@ -48,6 +49,7 @@ namespace TrekSurfing.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                HttpPostedFileBase file = Request.Files.Count != 0 ? Request.Files.Get(0) : null;
                 TrekEvent trekEvent = new TrekEvent
                 {
                     Created = DateTime.Now,
@@ -56,6 +58,7 @@ namespace TrekSurfing.Web.Controllers
                     Starts = model.Starts,
                     Ends = model.Starts,
                     Route = model.Route,
+                    Image = file!=null ? ConvertToBytes(file) : null,
                     Description = model.Description
                 };
                 unitOfWork.TrekEvents.Add(trekEvent);
@@ -63,6 +66,14 @@ namespace TrekSurfing.Web.Controllers
                 return RedirectToAction("Index", "Home");
             }
             return View(model);
+        }
+
+        private byte[] ConvertToBytes(HttpPostedFileBase image)
+        {
+            byte[] imageBytes = null;
+            BinaryReader reader = new BinaryReader(image.InputStream);
+            imageBytes = reader.ReadBytes((int)image.ContentLength);
+            return imageBytes;
         }
     }
 }
