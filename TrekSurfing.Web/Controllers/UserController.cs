@@ -119,11 +119,10 @@ namespace TrekSurfing.Web.Controllers
         {
             using (ApplicationDbContext context = new ApplicationDbContext())
             {
-                ProfileViewModel profile = new ProfileViewModel();
                 var data = UserManager.FindById(id);
                 if (data == null) return null; 
 
-                IEnumerable<TrekEvent> events = unitOfWork.TrekEvents.Find(trekEvent => trekEvent.OwnerId.Equals(profile.Id));
+                IEnumerable<TrekEvent> events = unitOfWork.TrekEvents.Find(trekEvent => trekEvent.OwnerId.Equals(data.Id));
                 return new ProfileViewModel {
                     Id = id,
                     UserName = data.UserName,
