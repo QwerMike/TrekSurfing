@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.IO;
 using System.Text;
+using System.Net;
 
 namespace TrekSurfing.Web.Controllers
 {
@@ -102,6 +103,44 @@ namespace TrekSurfing.Web.Controllers
             unitOfWork.Complete();
             TempData["message"] = string.Format("{0} was deleted!", deletedEvent.Name);
             return RedirectToAction("MyProfile", "User");
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var trekEvent = unitOfWork.TrekEvents.Get(id ?? -1);
+            if (trekEvent == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(trekEvent);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(string img, TrekEvent trekEvent)
+        {
+            if (ModelState.IsValid)
+            {
+                HttpPostedFileBase file = Request.Files.Count != 0 ? Request.Files.Get(0) : null;
+                var ev = unitOfWork.TrekEvents.Get(trekEvent.Id);
+                ev.Name = trekEvent.Name;
+                ev.Starts = trekEvent.Starts;
+                ev.Ends = trekEvent.Ends;
+                ev.Description = trekEvent.Description;
+                ev.Image = file != null ? ConvertToBytes(file) : null;
+                ev.Route = trekEvent.Route;
+                unitOfWork.Complete();
+                return RedirectToAction("MyProfile", "User");
+            }
+
+            return View(trekEvent);
         }
 
         //[HttpPost]
