@@ -14,6 +14,7 @@ using System.Text;
 
 namespace TrekSurfing.Web.Controllers
 {
+    [Authorize]
     public class EventController : Controller
     {
         private IUnitOfWork unitOfWork;
@@ -23,13 +24,14 @@ namespace TrekSurfing.Web.Controllers
             this.unitOfWork = unitOfWork;
         }
 
-        // GET: View
+        [AllowAnonymous]
         public ActionResult ViewAllEvents()
         {
             ViewBag.Events = unitOfWork.TrekEvents.GetAll();
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult ViewEvent(int id)
         {
             TrekEvent trekEvent = unitOfWork.TrekEvents.Get(id);
@@ -91,6 +93,10 @@ namespace TrekSurfing.Web.Controllers
         public ActionResult DeleteEvent(int id)
         {
             TrekEvent deletedEvent = unitOfWork.TrekEvents.Get(id);
+
+            if (this.User.Identity.GetUserId() != deletedEvent.Owner.Id)
+                throw new Exception("You can't delete other's events");
+
             unitOfWork.TrekEvents.Remove(deletedEvent);
             unitOfWork.Complete();
             TempData["message"] = string.Format("{0} was deleted!", deletedEvent.Name);
