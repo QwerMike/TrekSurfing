@@ -1,0 +1,39 @@
+﻿@using TrekSurfing.Web.Models;
+<div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" style='background-color: transparent; border: none; margin-top: 10px;' type="button" data-toggle="dropdown">
+        <i data-count="3" class="glyphicon glyphicon-bell notification-icon"></i>
+        @if (ViewBag.Notifications != null)
+        {
+            <span class="badge">@ViewBag.Number</span>
+        }
+    </button>
+    <ul class="dropdown-menu" style="width: 400px;">
+        @if (ViewBag.Notifications != null)
+        {
+            foreach (var notification in (IEnumerable<Notification>)ViewBag.Notifications)
+            {
+                <li style="padding: 10px;">
+                    <table class="table">
+                        <tr>
+                            <td>
+                                <p>@notification.Message</p>
+                                <div class="notification-meta">
+                                    <small class="timestamp">@notification.Created</small>
+                                </div>
+                            </td>
+                            <td rowspan="2" align="right">
+                                <button type="button" class="btn btn-success">
+                                    <span class="glyphicon glyphicon-ok"></span> Ok
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </li>
+            }
+        }
+        else
+        {
+            <li><strong>Empty</strong></li>
+        }
+    </ul>
+</div>

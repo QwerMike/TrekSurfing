@@ -189,6 +189,7 @@
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\RoleAdminController.cs" />
     <Compile Include="DAL\ApplicationDbContext.cs" />
     <Compile Include="DAL\Interfaces\IUnitOfWork.cs" />
@@ -327,6 +328,7 @@
     <Content Include="Views\RoleAdmin\Edit.cshtml" />
     <Content Include="Views\Event\Edit.cshtml" />
     <Content Include="Views\Event\ViewNotConfirmedEvents.cshtml" />
+    <Content Include="Views\Shared\CurrentUserNotifications.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
