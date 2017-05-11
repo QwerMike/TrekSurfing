@@ -34,6 +34,13 @@ namespace TrekSurfing.Web.Controllers
             return View(trekEvent);
         }
 
+        [Authorize(Roles = "Administrator")]
+        public ActionResult ViewNotConfirmedEvents()
+        {
+            ViewBag.Events = unitOfWork.TrekEvents.GetAllNotConfirmed();
+            return View();
+        }
+
         [HttpGet]
         public ActionResult Create()
         {
@@ -99,6 +106,13 @@ namespace TrekSurfing.Web.Controllers
             unitOfWork.Complete();
             TempData["message"] = string.Format("{0} was deleted!", deletedEvent.Name);
             return RedirectToAction("MyProfile", "User");
+        }
+        
+        [Authorize(Roles = "Administrator")]
+        public ActionResult ChangeEventConfirmation(int id, bool confirmed)
+        {
+            unitOfWork.TrekEvents.ChangeConfirmation(id, confirmed);
+            return RedirectToAction("ViewNotConfirmedEvents", "Event");
         }
 
         [HttpGet]
