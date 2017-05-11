@@ -2,14 +2,15 @@
 <div class="dropdown">
     <button class="btn btn-primary dropdown-toggle" style='background-color: transparent; border: none; margin-top: 10px;' type="button" data-toggle="dropdown">
         <i data-count="3" class="glyphicon glyphicon-bell notification-icon"></i>
-        @if (ViewBag.Notifications != null)
+        @if (ViewBag.Number != 0)
         {
             <span class="badge">@ViewBag.Number</span>
         }
     </button>
     <ul class="dropdown-menu" style="width: 400px;">
-        @if (ViewBag.Notifications != null)
+        @if (ViewBag.Number != 0)
         {
+            <li style="padding: 10px;"><strong>@Html.ActionLink("Mark all as read", "DeleteAllNotificationsForUser", "Notification")</strong></li>
             foreach (var notification in (IEnumerable<Notification>)ViewBag.Notifications)
             {
                 <li style="padding: 10px;">

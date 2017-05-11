@@ -39,5 +39,15 @@ namespace TrekSurfing.Web.Controllers
             unitOfWork.Complete();
             return Redirect(Request.UrlReferrer.AbsolutePath);
         }
+
+        public ActionResult DeleteAllNotificationsForUser()
+        {
+            string id = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            IEnumerable<Notification> notifications = unitOfWork.Notifications.GetAll().Where(n => n.ReceiverId.Equals(id)).AsEnumerable();
+
+            unitOfWork.Notifications.RemoveRange(notifications);
+            unitOfWork.Complete();
+            return Redirect(Request.UrlReferrer.AbsolutePath);
+        }
     }
 }
