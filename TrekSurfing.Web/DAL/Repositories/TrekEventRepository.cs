@@ -54,5 +54,15 @@ namespace TrekSurfing.Web.DAL.Repositories
             byte[] cover = q.First();
             return cover;
         }
+
+        public IEnumerable<TrekEvent> GetAllConfirmed()
+        {
+            return GetAll().Where(trekEvent => trekEvent.Confirmed == true);
+        }
+
+        public IEnumerable<TrekEvent> GetAllNotConfirmed()
+        {
+            return GetAll().Where(trekEvent => trekEvent.Confirmed == true);
+        }
     }
 }

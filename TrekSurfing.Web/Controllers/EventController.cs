@@ -1,16 +1,10 @@
 ﻿using System.Web.Mvc;
 using TrekSurfing.Web.Models;
-using System.Data.Entity;
-using System.Linq;
-using System.Collections.Generic;
-using TrekSurfing.Web.DAL;
 using Microsoft.AspNet.Identity;
 using TrekSurfing.Web.DAL.Interfaces;
 using System.Web;
-using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.IO;
-using System.Text;
 using System.Net;
 
 namespace TrekSurfing.Web.Controllers
@@ -28,7 +22,7 @@ namespace TrekSurfing.Web.Controllers
         [AllowAnonymous]
         public ActionResult ViewAllEvents()
         {
-            ViewBag.Events = unitOfWork.TrekEvents.GetAll();
+            ViewBag.Events = unitOfWork.TrekEvents.GetAllConfirmed();
             return View();
         }
 
@@ -36,6 +30,7 @@ namespace TrekSurfing.Web.Controllers
         public ActionResult ViewEvent(int id)
         {
             TrekEvent trekEvent = unitOfWork.TrekEvents.Get(id);
+            if (!trekEvent.Confirmed) return HttpNotFound();
             return View(trekEvent);
         }
 
@@ -115,7 +110,7 @@ namespace TrekSurfing.Web.Controllers
             }
 
             var trekEvent = unitOfWork.TrekEvents.Get(id ?? -1);
-            if (trekEvent == null)
+            if (trekEvent == null || !trekEvent.Confirmed)
             {
                 return HttpNotFound();
             }
@@ -143,7 +138,5 @@ namespace TrekSurfing.Web.Controllers
 
             return View(trekEvent);
         }
-
-        
     }
 }
