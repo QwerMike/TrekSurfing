@@ -30,7 +30,7 @@ namespace TrekSurfing.Web.Controllers
         public ActionResult ViewEvent(int id)
         {
             TrekEvent trekEvent = unitOfWork.TrekEvents.Get(id);
-            if (!trekEvent.Confirmed) return HttpNotFound();
+            if (trekEvent == null || !trekEvent.Confirmed) return HttpNotFound();
             return View(trekEvent);
         }
 

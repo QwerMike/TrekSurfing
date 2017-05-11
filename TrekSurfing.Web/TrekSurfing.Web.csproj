@@ -308,7 +308,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Event\Create.cshtml" />
     <Content Include="Views\Event\ViewAllEvents.cshtml" />
-    <Content Include="Views\Event\ViewEvent.cshtml" />
+    <Content Include="Views\Shared\ViewEvent.cshtml" />
     <Content Include="Views\User\ViewProfile.cshtml" />
     <Content Include="Views\User\EditProfile.cshtml" />
     <Content Include="Views\User\MyProfile.cshtml" />

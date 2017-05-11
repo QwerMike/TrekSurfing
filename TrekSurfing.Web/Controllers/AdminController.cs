@@ -44,6 +44,13 @@ namespace TrekSurfing.Web.Controllers
                 return View("CustomError", new string[] { "User Not Found" });
             }
         }
+        
+        public ActionResult ViewEvent(int id)
+        {
+            TrekEvent trekEvent = unitOfWork.TrekEvents.Get(id);
+            if (trekEvent == null) return HttpNotFound();
+            return View("ViewEvent", trekEvent);
+        }
 
         [HttpPost]
         public ActionResult DeleteEvent(int id)

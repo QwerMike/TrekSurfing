@@ -3,6 +3,24 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <h2>@Model.Name</h2>
+        @if (this.User.IsInRole("Administrator"))
+        {
+            if (!Model.Confirmed)
+            {
+                using (Html.BeginForm("ChangeEventConfirmation", "Event", FormMethod.Get))
+                {
+                    @Html.Hidden("id", Model.Id)
+                    @Html.Hidden("confirmed", true)
+                    <input type="submit" class="btn btn-default btn-xs btn-primary" value="Confirm" />
+                }
+            }
+
+            using (Html.BeginForm("DeleteEvent", "Admin", FormMethod.Post))
+            {
+                @Html.Hidden("id", Model.Id)
+                <input type="submit" class="btn btn-default btn-xs btn-danger" value="Delete" />
+            }
+        }
     </div>
     <div class="panel-body">
         <table class="table">
