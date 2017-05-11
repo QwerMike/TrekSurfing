@@ -28,6 +28,7 @@ namespace TrekSurfing.Web.Models
 
         public virtual IEnumerable<Review> Reviews { get; set; }
         public virtual IEnumerable<TrekEvent> TrekEvents { get; set; }
+        public virtual IEnumerable<Notification> Notifications { get; set; }
     }
 
     public class ApplicationRole : IdentityRole
