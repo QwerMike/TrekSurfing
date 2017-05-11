@@ -60,7 +60,8 @@ namespace TrekSurfing.Web.Controllers
                     Ends = model.Starts,
                     Route = model.Route,
                     Image = file!=null ? ConvertToBytes(file) : null,
-                    Description = model.Description
+                    Description = model.Description,
+                    Confirmed = false
                 };
                 unitOfWork.TrekEvents.Add(trekEvent);
                 unitOfWork.Complete();
@@ -143,10 +144,6 @@ namespace TrekSurfing.Web.Controllers
             return View(trekEvent);
         }
 
-        //[HttpPost]
-        //public ActionResult EditEvent(int id, EventCreationModel model)
-        //{
-
-        //}
+        
     }
 }

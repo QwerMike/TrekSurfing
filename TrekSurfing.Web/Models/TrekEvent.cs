@@ -27,5 +27,7 @@ namespace TrekSurfing.Web.Models
         public string Route { get; set; }
 
         public byte[] Image { get; set; }
+
+        public bool Confirmed { get; set; }
     }
 }
