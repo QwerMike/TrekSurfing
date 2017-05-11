@@ -113,7 +113,12 @@ namespace TrekSurfing.Web.Controllers
         {
             unitOfWork.TrekEvents.ChangeConfirmation(id, confirmed);
             TrekEvent trekEvent = unitOfWork.TrekEvents.Get(id);
-            if (confirmed) unitOfWork.Notifications.Add(new Notification { ReceiverId = trekEvent.OwnerId, Message = "Your trekking event " + trekEvent.Name + " was confirmed"});
+            if (confirmed)
+            {
+                unitOfWork.Notifications.Add(new Notification { Created = DateTime.Now, ReceiverId = trekEvent.OwnerId, Message = "Your trekking event " + trekEvent.Name + " was confirmed" });
+                unitOfWork.Complete();
+            }
+            
             return RedirectToAction("ViewNotConfirmedEvents", "Event");
         }
 
