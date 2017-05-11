@@ -22,9 +22,11 @@
                                 </div>
                             </td>
                             <td rowspan="2" align="right">
-                                <button type="button" class="btn btn-success">
-                                    <span class="glyphicon glyphicon-ok"></span> Ok
-                                </button>
+                                @using (Html.BeginForm("DeleteNotification", "Notification", FormMethod.Post))
+                                {
+                                    @Html.Hidden("id", notification.Id)
+                                    <input type="submit" class="btn btn-success" value="Ok" />
+                                }
                             </td>
                         </tr>
                     </table>
