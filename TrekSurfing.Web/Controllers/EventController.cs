@@ -94,7 +94,7 @@ namespace TrekSurfing.Web.Controllers
         public ActionResult DeleteEvent(int id)
         {
             TrekEvent deletedEvent = unitOfWork.TrekEvents.Get(id);
-
+            string idd = this.User.Identity.GetUserId();
             if (this.User.Identity.GetUserId() != deletedEvent.Owner.Id)
                 throw new Exception("You can't delete other's events");
 
