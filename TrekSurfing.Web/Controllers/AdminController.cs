@@ -12,10 +12,17 @@ namespace TrekSurfing.Web.Controllers
     public class AdminController : Controller
     {
         private IUnitOfWork unitOfWork;
+        private ApplicationUserManager userManager;
 
         public AdminController(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
+        }
+
+        public AdminController(IUnitOfWork unitOfWork, ApplicationUserManager userManager)
+        {
+            this.unitOfWork = unitOfWork;
+            this.userManager = userManager;
         }
 
         public ActionResult Index()
@@ -59,7 +66,7 @@ namespace TrekSurfing.Web.Controllers
         {
             get
             {
-                return HttpContext.GetOwinContext()
+                return userManager ?? HttpContext.GetOwinContext()
                     .GetUserManager<ApplicationUserManager>();
             }
         }

@@ -8,6 +8,7 @@ using Owin;
 using TrekSurfing.Web.Models;
 using TrekSurfing.Web.DAL;
 using TrekSurfing.Web.Infrastructure;
+using TrekSurfing.Web.DAL.Repositories;
 
 namespace TrekSurfing.Web
 {
