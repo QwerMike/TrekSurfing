@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using System.Threading.Tasks;
 using Moq.Protected;
+using TrekSurfing.Web.DAL.Interfaces.Repositories;
 
 namespace TrekSurfing.Web.Controllers.Tests
 {
@@ -21,7 +22,7 @@ namespace TrekSurfing.Web.Controllers.Tests
             new ApplicationUser() { Id = "id1", FirstName = "User1" },
             new ApplicationUser() { Id = "id2", FirstName = "User2" }
         };
-        
+
         private Mock<ApplicationUserManager> userManager =
                 new Mock<ApplicationUserManager>(
                     new Mock<IUserStore<ApplicationUser>>().Object);
@@ -30,7 +31,7 @@ namespace TrekSurfing.Web.Controllers.Tests
         {
             userManager.Setup(_ => _.Users).Returns(users.AsQueryable());
             userManager.Setup(_ => _.FindByIdAsync("id1"))
-                .Returns(Task.Run(()=> users[0]));
+                .Returns(Task.Run(() => users[0]));
             userManager.Setup(_ => _.FindByIdAsync("id2"))
                 .Returns(Task.Run(() => users[1]));
             userManager.Setup(_ => _.FindByIdAsync("badId"))
@@ -56,7 +57,7 @@ namespace TrekSurfing.Web.Controllers.Tests
             // invokes protected constructor
             Mock<IdentityResult> identityResult =
                 new Mock<IdentityResult>(true);
-            
+
             userManager.Setup(_ => _.DeleteAsync(users[0]))
                 .Returns(Task.Run(() => identityResult.Object));
 
@@ -102,6 +103,35 @@ namespace TrekSurfing.Web.Controllers.Tests
             Assert.IsNotNull(errors);
             Assert.AreEqual(1, errors.Length);
             Assert.AreEqual("User Not Found", errors[0]);
+        }
+
+        [TestMethod()]
+        public void DeleteEventTest()
+        {
+            var teRepository = new Mock<ITrekEventRepository>();
+            var te = new TrekEvent()
+            {
+                Id = 0,
+                Name = "Event"
+            };
+
+            bool isRemoved = false;
+            teRepository.Setup(_ => _.Get(0)).Returns(te);
+            teRepository.Setup(_ => _.Remove(te))
+                .Callback(() => isRemoved = true);
+
+            var uow = new Mock<IUnitOfWork>();
+            uow.SetupGet(_ => _.TrekEvents).Returns(teRepository.Object);
+            
+            var controller = new AdminController(uow.Object);
+            var result = controller.DeleteEvent(0) as RedirectToRouteResult;
+
+            Assert.AreEqual("Event was deleted!", controller.TempData["message"]);
+            Assert.IsTrue(isRemoved);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.RouteValues.Count);
+            Assert.AreEqual("ViewAllEvents", result.RouteValues["action"]);
+            Assert.AreEqual("Event", result.RouteValues["controller"]);
         }
     }
 }
