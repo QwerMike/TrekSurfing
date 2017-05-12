@@ -45,10 +45,10 @@ namespace TrekSurfing.Web.Controllers.Tests
                 null, userManager.Object);
 
             var result = controller.Index() as ViewResult;
-            var expectedUsers = result.Model as IEnumerable<ApplicationUser>;
+            var actualUsers = result.Model as IEnumerable<ApplicationUser>;
 
-            Assert.IsNotNull(expectedUsers);
-            Assert.IsTrue(expectedUsers.SequenceEqual(users));
+            Assert.IsNotNull(actualUsers);
+            Assert.IsTrue(actualUsers.SequenceEqual(users));
         }
 
         [TestMethod()]
