@@ -14,6 +14,10 @@ namespace TrekSurfing.Web.Controllers
     [Authorize(Roles = "Administrator")]
     public class RoleAdminController : Controller
     {
+        private ApplicationUserManager userManager;
+
+        private ApplicationRoleManager roleManager;
+
         public ActionResult Index()
         {
             return View(RoleManager.Roles);
@@ -121,7 +125,7 @@ namespace TrekSurfing.Web.Controllers
         {
             get
             {
-                return HttpContext.GetOwinContext()
+                return userManager ?? HttpContext.GetOwinContext()
                     .GetUserManager<ApplicationUserManager>();
             }
         }
@@ -130,7 +134,7 @@ namespace TrekSurfing.Web.Controllers
         {
             get
             {
-                return HttpContext.GetOwinContext()
+                return roleManager ?? HttpContext.GetOwinContext()
                     .GetUserManager<ApplicationRoleManager>();
             }
         }
