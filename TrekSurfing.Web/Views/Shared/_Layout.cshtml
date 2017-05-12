@@ -30,6 +30,12 @@
                             @Html.ActionLink("Users", "Index", "Admin")
                         }
                     </li>
+                    <li>
+                        @if (this.User.IsInRole("Administrator"))
+                        {
+                            @Html.ActionLink("Submitted events", "ViewNotConfirmedEvents", "Event")
+                        }
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

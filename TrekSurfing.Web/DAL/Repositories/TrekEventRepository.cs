@@ -3,7 +3,6 @@ using TrekSurfing.Web.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Collections.Generic;
-using System.Text;
 
 namespace TrekSurfing.Web.DAL.Repositories
 {
@@ -53,6 +52,26 @@ namespace TrekSurfing.Web.DAL.Repositories
             var q = from temp in AppDbContext.TrekEvents where temp.Id == id select temp.Image;
             byte[] cover = q.First();
             return cover;
+        }
+
+        public IEnumerable<TrekEvent> GetAllConfirmed()
+        {
+            return GetAll().Where(trekEvent => trekEvent.Confirmed == true);
+        }
+
+        public IEnumerable<TrekEvent> GetAllNotConfirmed()
+        {
+            return GetAll().Where(trekEvent => trekEvent.Confirmed == false);
+        }
+
+        public void ChangeConfirmation(int id, bool confirmed)
+        {
+            TrekEvent trekEvent = AppDbContext.TrekEvents.Where(e => e.Id == id).FirstOrDefault();
+            if (trekEvent != null)
+            {
+                trekEvent.Confirmed = confirmed;
+                AppDbContext.SaveChanges();
+            }
         }
     }
 }

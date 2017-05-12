@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using TrekSurfing.Web.DAL.Interfaces;
 using TrekSurfing.Web.DAL.Interfaces.Repositories;
 using TrekSurfing.Web.DAL.Repositories;
@@ -16,22 +13,27 @@ namespace TrekSurfing.Web.DAL
 
         private IReviewRepository reviews;
 
+        private INotificationRepository notifications;
+
         public UnitOfWork(
             ApplicationDbContext context)
         {
             this.context = context;
             trekEvents = new TrekEventRepository(context);
             reviews = new ReviewRepository(context);
+            notifications = new NotificationRepository(context);
         }
 
         public UnitOfWork(
             ApplicationDbContext context,
             ITrekEventRepository trekEventRepository,
-            IReviewRepository reviewRepository)
+            IReviewRepository reviewRepository,
+            INotificationRepository notificationRepository)
         {
             this.context = context;
             trekEvents = new TrekEventRepository(context);
             reviews = new ReviewRepository(context);
+            notifications = new NotificationRepository(context);
         }
 
         public ITrekEventRepository TrekEvents
@@ -43,6 +45,11 @@ namespace TrekSurfing.Web.DAL
         {
             get { return reviews; }
         }        
+
+        public INotificationRepository Notifications
+        {
+            get { return notifications; }
+        }
 
         public int Complete()
         {

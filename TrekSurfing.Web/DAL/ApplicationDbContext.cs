@@ -20,6 +20,7 @@ namespace TrekSurfing.Web.DAL
 
         public DbSet<TrekEvent> TrekEvents { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
         public void PerformInitialSetup(ApplicationDbContext context)
         {

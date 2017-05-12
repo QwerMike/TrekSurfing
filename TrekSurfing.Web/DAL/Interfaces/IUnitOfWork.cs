@@ -7,6 +7,7 @@ namespace TrekSurfing.Web.DAL.Interfaces
     {
         ITrekEventRepository TrekEvents { get; }
         IReviewRepository Reviews { get; }
+        INotificationRepository Notifications { get; }
         int Complete();
     }
 }

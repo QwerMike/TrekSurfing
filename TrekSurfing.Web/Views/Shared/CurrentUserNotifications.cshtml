@@ -1,0 +1,42 @@
+﻿@using TrekSurfing.Web.Models;
+<div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" style='background-color: transparent; border: none; margin-top: 10px;' type="button" data-toggle="dropdown">
+        <i data-count="3" class="glyphicon glyphicon-bell notification-icon"></i>
+        @if (ViewBag.Number != 0)
+        {
+            <span class="badge">@ViewBag.Number</span>
+        }
+    </button>
+    <ul class="dropdown-menu" style="width: 400px;">
+        @if (ViewBag.Number != 0)
+        {
+            <li style="padding: 10px;"><strong>@Html.ActionLink("Mark all as read", "DeleteAllNotificationsForUser", "Notification")</strong></li>
+            foreach (var notification in (IEnumerable<Notification>)ViewBag.Notifications)
+            {
+                <li style="padding: 10px;">
+                    <table class="table">
+                        <tr>
+                            <td>
+                                <p>@notification.Message</p>
+                                <div class="notification-meta">
+                                    <small class="timestamp">@notification.Created</small>
+                                </div>
+                            </td>
+                            <td rowspan="2" align="right">
+                                @using (Html.BeginForm("DeleteNotification", "Notification", FormMethod.Post))
+                                {
+                                    @Html.Hidden("id", notification.Id)
+                                    <input type="submit" class="btn btn-success" value="Ok" />
+                                }
+                            </td>
+                        </tr>
+                    </table>
+                </li>
+            }
+        }
+        else
+        {
+            <li><strong>Empty</strong></li>
+        }
+    </ul>
+</div>

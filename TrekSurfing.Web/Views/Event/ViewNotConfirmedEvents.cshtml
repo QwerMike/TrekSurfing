@@ -1,0 +1,41 @@
+﻿@using TrekSurfing.Web.Models;
+@{
+    ViewBag.Title = "ViewNotConfirmedEvents";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <tr>
+                <th>Name</th>
+                <th>Owner</th>
+                <th>Starts</th>
+                <th colspan="3">Ends</th>
+            </tr>
+            @foreach (var trekEvent in (IEnumerable<TrekEvent>)ViewBag.Events)
+            {
+                <tr>
+                    <td><a href="@Url.Action("ViewEvent", "Admin", new { id = trekEvent.Id })"><b>@trekEvent.Name</b></a></td>
+                    <td><a href="/User/ViewProfile/@trekEvent.Owner.Id">@trekEvent.Owner.UserName</a></td>
+                    <td>@trekEvent.Starts</td>
+                    <td>@trekEvent.Ends</td>
+                    <td>
+                        @using (Html.BeginForm("ChangeEventConfirmation", "Event", FormMethod.Get))
+                        {
+                            @Html.Hidden("id", trekEvent.Id)
+                            @Html.Hidden("confirmed", true)
+                            <input type="submit" class="btn btn-default btn-xs btn-primary" value="Confirm" />
+                        }
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("DeleteEvent", "Admin", FormMethod.Post))
+                        {
+                            @Html.Hidden("id", trekEvent.Id)
+                            <input type="submit" class="btn btn-default btn-xs btn-danger" value="Delete" />
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

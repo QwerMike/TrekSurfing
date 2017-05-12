@@ -22,7 +22,7 @@ namespace TrekSurfing.Web.Tests.Controllers
             ViewResult result = controller.Index() as ViewResult;
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.IsNull(result);
         }
 
         [TestMethod]

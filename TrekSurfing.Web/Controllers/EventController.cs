@@ -1,16 +1,10 @@
 ﻿using System.Web.Mvc;
 using TrekSurfing.Web.Models;
-using System.Data.Entity;
-using System.Linq;
-using System.Collections.Generic;
-using TrekSurfing.Web.DAL;
 using Microsoft.AspNet.Identity;
 using TrekSurfing.Web.DAL.Interfaces;
 using System.Web;
-using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.IO;
-using System.Text;
 using System.Net;
 
 namespace TrekSurfing.Web.Controllers
@@ -28,7 +22,7 @@ namespace TrekSurfing.Web.Controllers
         [AllowAnonymous]
         public ActionResult ViewAllEvents()
         {
-            ViewBag.Events = unitOfWork.TrekEvents.GetAll();
+            ViewBag.Events = unitOfWork.TrekEvents.GetAllConfirmed();
             return View();
         }
 
@@ -36,7 +30,15 @@ namespace TrekSurfing.Web.Controllers
         public ActionResult ViewEvent(int id)
         {
             TrekEvent trekEvent = unitOfWork.TrekEvents.Get(id);
+            if (trekEvent == null || !trekEvent.Confirmed) return HttpNotFound();
             return View(trekEvent);
+        }
+
+        [Authorize(Roles = "Administrator")]
+        public ActionResult ViewNotConfirmedEvents()
+        {
+            ViewBag.Events = unitOfWork.TrekEvents.GetAllNotConfirmed();
+            return View();
         }
 
         [HttpGet]
@@ -60,7 +62,8 @@ namespace TrekSurfing.Web.Controllers
                     Ends = model.Starts,
                     Route = model.Route,
                     Image = file!=null ? ConvertToBytes(file) : null,
-                    Description = model.Description
+                    Description = model.Description,
+                    Confirmed = false
                 };
                 unitOfWork.TrekEvents.Add(trekEvent);
                 unitOfWork.Complete();
@@ -104,6 +107,20 @@ namespace TrekSurfing.Web.Controllers
             TempData["message"] = string.Format("{0} was deleted!", deletedEvent.Name);
             return RedirectToAction("MyProfile", "User");
         }
+        
+        [Authorize(Roles = "Administrator")]
+        public ActionResult ChangeEventConfirmation(int id, bool confirmed)
+        {
+            unitOfWork.TrekEvents.ChangeConfirmation(id, confirmed);
+            TrekEvent trekEvent = unitOfWork.TrekEvents.Get(id);
+            if (confirmed)
+            {
+                unitOfWork.Notifications.Add(new Notification { Created = DateTime.Now, ReceiverId = trekEvent.OwnerId, Message = "Your trekking event " + trekEvent.Name + " was confirmed" });
+                unitOfWork.Complete();
+            }
+            
+            return RedirectToAction("ViewNotConfirmedEvents", "Event");
+        }
 
         [HttpGet]
         public ActionResult Edit(int? id)
@@ -114,7 +131,7 @@ namespace TrekSurfing.Web.Controllers
             }
 
             var trekEvent = unitOfWork.TrekEvents.Get(id ?? -1);
-            if (trekEvent == null)
+            if (trekEvent == null || !trekEvent.Confirmed)
             {
                 return HttpNotFound();
             }
@@ -142,11 +159,5 @@ namespace TrekSurfing.Web.Controllers
 
             return View(trekEvent);
         }
-
-        //[HttpPost]
-        //public ActionResult EditEvent(int id, EventCreationModel model)
-        //{
-
-        //}
     }
 }
