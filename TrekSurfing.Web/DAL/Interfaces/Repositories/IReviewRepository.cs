@@ -1,4 +1,5 @@
-﻿using TrekSurfing.Web.Models;
+﻿using System.Collections.Generic;
+using TrekSurfing.Web.Models;
 
 namespace TrekSurfing.Web.DAL.Interfaces.Repositories
 {

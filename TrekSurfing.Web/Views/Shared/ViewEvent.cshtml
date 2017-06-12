@@ -1,8 +1,10 @@
 ﻿@model TrekSurfing.Web.Models.TrekEvent
+@using TrekSurfing.Web.Models;
 
 <div class="panel panel-default">
     <div class="panel-heading">
         <h2>@Model.Name</h2>
+        <h3>@ViewBag.AverageScore</h3>
         @if (this.User.IsInRole("Administrator"))
         {
             if (!Model.Confirmed)
@@ -45,13 +47,13 @@
                 <td>@Model.Ends</td>
             </tr>
             <tr>
+                <td colspan="2">Description:<br />@Model.Description</td>
+            </tr>
+            <tr>
                 <td colspan="2">
                     Route:<br />
                     <iframe src="@Model.Route" style="width: 100%; height: 500px;"></iframe>
                 </td>
-            </tr>
-            <tr>
-                <td colspan="2">Description:<br />@Model.Description</td>
             </tr>
         </table>
         @if (this.User.IsInRole("Administrator"))
@@ -66,5 +68,21 @@
                 </button>
             }
         }
+
+        <div>
+            <h3>Reviews</h3>
+            <table class="table">
+                @foreach (var review in Model.Reviews)
+                {
+                    <tr>
+                        <td><i>@review.Author.FirstName @review.Author.SecondName</i></td>
+                        <td>@review.Score</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">@review.Message</td>
+                    </tr>
+                }
+            </table>
+        </div>
     </div>
 </div>

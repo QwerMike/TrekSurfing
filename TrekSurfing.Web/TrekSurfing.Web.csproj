@@ -244,6 +244,10 @@
     <Compile Include="Migrations\201705111614249_AddNotification.Designer.cs">
       <DependentUpon>201705111614249_AddNotification.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706120707201_AddReviewToTrekEvent.cs" />
+    <Compile Include="Migrations\201706120707201_AddReviewToTrekEvent.Designer.cs">
+      <DependentUpon>201706120707201_AddReviewToTrekEvent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\EntityBase.cs" />
@@ -368,6 +372,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705111614249_AddNotification.resx">
       <DependentUpon>201705111614249_AddNotification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706120707201_AddReviewToTrekEvent.resx">
+      <DependentUpon>201706120707201_AddReviewToTrekEvent.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -27,6 +28,8 @@ namespace TrekSurfing.Web.Models
         public string Route { get; set; }
 
         public byte[] Image { get; set; }
+
+        public IEnumerable<Review> Reviews { get; set; }
 
         public bool Confirmed { get; set; }
     }

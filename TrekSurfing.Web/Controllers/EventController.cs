@@ -30,6 +30,8 @@ namespace TrekSurfing.Web.Controllers
         public ActionResult ViewEvent(int id)
         {
             TrekEvent trekEvent = unitOfWork.TrekEvents.Get(id);
+            trekEvent.Reviews = unitOfWork.TrekEvents.GetReviews(id);
+            ViewBag.AverageScore = unitOfWork.TrekEvents.GetAverageScore(id);
             if (trekEvent == null || !trekEvent.Confirmed) return HttpNotFound();
             return View(trekEvent);
         }

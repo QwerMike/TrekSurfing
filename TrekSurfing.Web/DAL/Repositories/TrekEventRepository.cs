@@ -73,5 +73,15 @@ namespace TrekSurfing.Web.DAL.Repositories
                 AppDbContext.SaveChanges();
             }
         }
+
+        public IEnumerable<Review> GetReviews(int id)
+        {
+            return AppDbContext.Set<Review>().Include(_ => _.Author).Where(_ => _.Target.Id == id);
+        }
+
+        public double GetAverageScore(int id)
+        {
+            return GetReviews(id).Average(_ => _.Score);
+        }
     }
 }

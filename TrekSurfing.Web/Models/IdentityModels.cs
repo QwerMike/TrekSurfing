@@ -26,7 +26,6 @@ namespace TrekSurfing.Web.Models
         public string About { get; set; }
         public byte[] Image { get; set; }
 
-        public virtual IEnumerable<Review> Reviews { get; set; }
         public virtual IEnumerable<TrekEvent> TrekEvents { get; set; }
         public virtual IEnumerable<Notification> Notifications { get; set; }
     }

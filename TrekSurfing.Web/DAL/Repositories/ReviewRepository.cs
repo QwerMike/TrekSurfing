@@ -1,4 +1,6 @@
-﻿using TrekSurfing.Web.DAL.Interfaces.Repositories;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using TrekSurfing.Web.DAL.Interfaces.Repositories;
 using TrekSurfing.Web.Models;
 
 namespace TrekSurfing.Web.DAL.Repositories
