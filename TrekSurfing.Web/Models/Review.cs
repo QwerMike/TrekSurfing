@@ -10,7 +10,7 @@ namespace TrekSurfing.Web.Models
     public class Review : EntityBase
     {
         [Required(ErrorMessage = "Score is required")]
-        [Range(0, 1)]
+        [Range(1, 5)]
         public double Score { get; set; }
 
         [Required(ErrorMessage = "Message is required")]
